@@ -45,7 +45,7 @@ window.addEventListener("load", function() {
         }
 
     });
-    fetch("https://https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
         response.json().then(function(json) {
             missionTarget = document.getElementById("missionTarget")
             missionTarget.innerHTML = `
