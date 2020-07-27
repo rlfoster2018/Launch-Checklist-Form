@@ -7,21 +7,28 @@ window.addEventListener("load", function() {
         let copilotNameInput = document.getElementById("copilotName");
         fuelLevelInput = Number(document.getElementById("fuelLevel").value); // it's a number!!!
         cargoMassInput = Number(document.getElementById("cargoMass").value); // this is too!  Hooray!!!
-        if (pilotNameInput.value === "" || copilotNameInput === "" || fuelLevelInput < 10000 || cargoMassInput > 10000) {
+        if (pilotNameInput.value === "" || copilotNameInput === "" || fuelLevelInput < 10000 ||
+            cargoMassInput > 10000 || isNaN(pilotNameInput) === false || isNaN(copilotNameInput) === false ||
+            isNaN(fuelLevelInput) === true || isNaN(cargoMassInput) === true) {
+
             document.getElementById("faultyItems").style.visibility = "visible";
             document.getElementById("launchStatus").style.backgroundColor = "red";
             document.getElementById("launchStatus").innerHTML = "Shuttle Not Ready For Launch";
-            if (pilotNameInput.value === "") {
+            if (pilotNameInput.value === "" || isNaN(pilotNameInput.value) === false) {
                 document.getElementById("pilotStatus").innerHTML = "Pilot not ready";
+                console.log("Pilot error");
             }
-            if (copilotNameInput.value === "") {
+            if (copilotNameInput.value === "" || isNaN(copilotNameInput.value) === false) {
                 document.getElementById("copilotStatus").innerHTML = "Copilot not ready";
+                console.log("Copilot error");
             }
-            if (fuelLevelInput < 10000) {
+            if (fuelLevelInput < 10000 || isNaN(fuelLevelInput) === true) {
                 document.getElementById("fuelStatus").innerHTML = "Fuel level too low";
+                console.log("Fuel error");
             }
-            if (cargoMassInput > 10000) {
-                document.getElementById("cargoStatus").innerHTML = "Too much cargo";
+            if (cargoMassInput > 10000 || isNaN(cargoMassInput) === true) {
+                document.getElementById("cargoStatus").innerHTML = "Cargo error";
+                console.log("Cargo error");
             }
             event.preventDefault();
             return
@@ -29,6 +36,10 @@ window.addEventListener("load", function() {
             document.getElementById("faultyItems").style.visibility = "visible";
             document.getElementById("launchStatus").style.backgroundColor = "green";
             document.getElementById("launchStatus").innerHTML = "Shuttle ready for launch";
+            document.getElementById("pilotStatus").innerHTML = "Pilot ready";
+            document.getElementById("copilotStatus").innerHTML = "Copilot ready";
+            document.getElementById("fuelStatus").innerHTML = "Fuel level sufficient";
+            document.getElementById("cargoStatus").innerHTML = "Cargo ready for launch";
             event.preventDefault();
             return
         }
